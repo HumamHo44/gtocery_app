@@ -20,7 +20,7 @@ class FruitItem extends StatelessWidget {
                 const SizedBox(height: 20),
                 Expanded(
                   flex: 2,
-                  child: Center(child: Image.asset(product.image)),
+                  child: Center(child: Image.network(product.image)),
                 ),
                 const SizedBox(height: 24),
                 Expanded(
@@ -34,7 +34,7 @@ class FruitItem extends StatelessWidget {
                       ),
                     ),
                     subtitle: Text(
-                      '${product.weight},${product.price}',
+                      '${product.weight}kg, \$${product.price}',
                       style: const TextStyle(
                         color: Color(0xFFFF314A),
                         fontSize: 16,

@@ -30,7 +30,9 @@ class CategoryCard extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Center(
-                child: SvgPicture.asset(iconPath, width: 40, height: 40),
+                child: Center(
+                  child: Image.network(iconPath, width: 40, height: 40),
+                ),
               ),
             ),
             const SizedBox(height: 6),
