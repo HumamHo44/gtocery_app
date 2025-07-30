@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gtocery_app/home/widgets/home_page_body.dart';
+import 'package:gtocery_app/screens/Cart_screen.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
@@ -12,7 +13,7 @@ class CustomBottomNavBar extends StatelessWidget {
   final Function(int) onTap;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 70,
 
       child: Stack(
@@ -46,35 +47,46 @@ class CustomBottomNavBar extends StatelessWidget {
             left: 0,
             right: 0,
             child: Center(
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/shopping.svg',
-                    width: 50,
-                    height: 50,
-                  ),
-                  Positioned(
-                    right: 12,
-                    bottom: -22,
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 2),
-                      ),
-                      child: const Text(
-                        '4',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const CartPage();
+                      },
+                    ),
+                  );
+                },
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/shopping.svg',
+                      width: 50,
+                      height: 50,
+                    ),
+                    Positioned(
+                      right: 12,
+                      bottom: -22,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: const Text(
+                          '4',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gtocery_app/screens/settings_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -40,7 +41,16 @@ class ProfilePage extends StatelessWidget {
           Divider(thickness: 1, color: Colors.grey.shade300, height: 20),
           buildSectionCard('PROFILE', [
             buildMenuItem(Icons.person_outline, 'Personal Data'),
-            buildMenuItem(Icons.settings_outlined, 'Settings'),
+            buildMenuItem(
+              Icons.settings_outlined,
+              'Settings',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SettingsPage()),
+                );
+              },
+            ),
             buildMenuItem(Icons.credit_card, 'Extra Card'),
           ]),
           const SizedBox(height: 10),
@@ -99,14 +109,14 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget buildMenuItem(IconData icon, String label) {
+  Widget buildMenuItem(IconData icon, String label, {VoidCallback? onTap}) {
     return ListTile(
       dense: true,
       leading: Icon(icon, color: Colors.black, size: 20),
       title: Text(label, style: const TextStyle(fontSize: 14)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 14),
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gtocery_app/home/home_page.dart';
+import 'package:gtocery_app/screens/phone_input_screen.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});
@@ -64,7 +64,7 @@ class OnBoarding extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
-                          return const HomePage();
+                          return const PhoneInputScreen();
                         },
                       ),
                     );
