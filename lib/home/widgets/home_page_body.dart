@@ -6,7 +6,7 @@ import 'package:gtocery_app/home/widgets/categories_section.dart';
 import 'package:gtocery_app/home/widgets/category_section_header.dart';
 import 'package:gtocery_app/home/widgets/custom_home_app_bar.dart';
 import 'package:gtocery_app/home/widgets/image_slider.dart';
-import 'package:gtocery_app/home/widgets/search_text%D9%80filed.dart';
+import 'package:gtocery_app/home/widgets/search_text_filed.dart';
 
 class HomePageBody extends StatelessWidget {
   const HomePageBody({super.key});

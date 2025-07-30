@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "362152940762",
+    "project_id": "fruithub-8b7ba",
+    "storage_bucket": "fruithub-8b7ba.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362152940762:android:4994511c4fc9f168c381e3",
+        "android_client_info": {
+          "package_name": "com.example.gtocery_app2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnzfcserVRUyx1Y9KGyH0raE90Er-p0Fc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
