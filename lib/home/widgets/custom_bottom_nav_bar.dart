@@ -76,7 +76,7 @@ class CustomBottomNavBar extends StatelessWidget {
                           border: Border.all(color: Colors.white, width: 2),
                         ),
                         child: const Text(
-                          '4',
+                          '0',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,

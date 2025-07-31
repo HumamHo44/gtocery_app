@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ProductView extends StatefulWidget {
   final String title;
   final String price;
+  final String weight;
   final String imagePath;
 
   const ProductView({
@@ -10,6 +12,7 @@ class ProductView extends StatefulWidget {
     required this.title,
     required this.price,
     required this.imagePath,
+    required this.weight,
   });
 
   @override
@@ -45,7 +48,7 @@ class _ProductViewState extends State<ProductView> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
+                    child: Image.network(
                       widget.imagePath,
                       fit: BoxFit.contain,
                       width: double.infinity,
@@ -190,7 +193,18 @@ class _ProductViewState extends State<ProductView> {
               width: double.infinity,
               height: 52,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await FirebaseFirestore.instance.collection("cart").add({
+                    'name': widget.title,
+                    'image': widget.imagePath,
+                    'weight': widget.weight,
+                    'price': widget.price,
+                    'quantity': quantity,
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("${widget.title} added to cart")),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF23AA49),
                   shape: RoundedRectangleBorder(

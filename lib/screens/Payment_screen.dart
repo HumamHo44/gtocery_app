@@ -5,30 +5,31 @@ class Payment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartItems =
+        ModalRoute.of(context)!.settings.arguments
+            as List<Map<String, dynamic>>;
+
+    double subtotal = cartItems.fold(
+      0,
+      (sum, item) => sum + (double.parse(item['price']) * item['quantity']),
+    );
+    double driverFee = subtotal * 0.05;
+    double tax = subtotal * 0.10;
+    double total = subtotal + driverFee + tax;
+
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
-        child: Container(
-          decoration: const BoxDecoration(color: Colors.white),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new),
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            title: const Text(
-              'payment',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          color: Colors.black,
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          'Payment',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(
@@ -54,41 +55,40 @@ class Payment extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          // Image.network(
 
-                          //   width: 60,
-                          //   height: 60,
-                          // ),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Arabic Ginger',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                      ...cartItems.map(
+                        (item) => Row(
+                          children: [
+                            Image.network(item['image'], width: 60, height: 60),
+                            const SizedBox(width: 12),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item['name'],
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '\$ 12,230',
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                                Text(
+                                  '\$${item['price']}',
+                                  style: const TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          const Text(
-                            '14 items',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
+                              ],
+                            ),
+                            const Spacer(),
+                            Text(
+                              '${item['quantity']} items',
+                              style: const TextStyle(color: Colors.grey),
+                            ),
+                          ],
+                        ),
                       ),
+
                       const SizedBox(height: 24),
                       const Text(
                         'Details Transaction',
@@ -98,17 +98,25 @@ class Payment extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const RowText(
-                        title: 'Cherry Healthy',
-                        value: '\$ 180.000',
+
+                      RowText(
+                        title: 'Subtotal',
+                        value: '\$${subtotal.toStringAsFixed(2)}',
                       ),
-                      const RowText(title: 'Driver', value: '\$ 50.000'),
-                      const RowText(title: 'Tax 10%', value: '\$ 80.390'),
+                      RowText(
+                        title: 'Driver (5%)',
+                        value: '\$${driverFee.toStringAsFixed(2)}',
+                      ),
+                      RowText(
+                        title: 'Tax (10%)',
+                        value: '\$${tax.toStringAsFixed(2)}',
+                      ),
+
                       const SizedBox(height: 12),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Total Price',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -116,8 +124,8 @@ class Payment extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '\$ 100.000',
-                            style: TextStyle(
+                            '\$${total.toStringAsFixed(2)}',
+                            style: const TextStyle(
                               color: Colors.green,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -125,6 +133,7 @@ class Payment extends StatelessWidget {
                           ),
                         ],
                       ),
+
                       const SizedBox(height: 24),
                       const Divider(),
                       const SizedBox(height: 16),
@@ -149,6 +158,8 @@ class Payment extends StatelessWidget {
                 ),
               ),
             ),
+
+            // ✅ زر الدفع
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: SizedBox(
@@ -179,7 +190,6 @@ class Payment extends StatelessWidget {
 class RowText extends StatelessWidget {
   final String title;
   final String value;
-
   const RowText({required this.title, required this.value});
 
   @override
@@ -197,7 +207,6 @@ class RowText extends StatelessWidget {
 class InfoRow extends StatelessWidget {
   final String label;
   final String value;
-
   const InfoRow({required this.label, required this.value});
 
   @override

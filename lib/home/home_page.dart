@@ -21,9 +21,6 @@ class _HomePageState extends State<HomePage> {
     final themeManager = Provider.of<ThemeManager>(context);
 
     return Scaffold(
-      backgroundColor: themeManager.themeMode == ThemeMode.dark
-          ? Colors.grey[900]
-          : Colors.white,
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: currentIndex,
         onTap: (index) {
@@ -36,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         child: Theme(
           data: Theme.of(context).copyWith(
             scaffoldBackgroundColor: themeManager.themeMode == ThemeMode.dark
-                ? Colors.grey[900]
+                ? Color(0xFF0D1F29)
                 : Colors.white,
           ),
           child: pages[currentIndex],

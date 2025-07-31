@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:gtocery_app/theme_manager.dart';
+import 'package:provider/provider.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
@@ -13,6 +14,7 @@ class CategoryCard extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<ThemeManager>(context);
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -25,8 +27,10 @@ class CategoryCard extends StatelessWidget {
             Container(
               width: 60,
               height: 60,
-              decoration: const BoxDecoration(
-                color: Colors.white,
+              decoration: BoxDecoration(
+                color: themeManager.themeMode == ThemeMode.dark
+                    ? Color(0xFF1A3848)
+                    : Colors.white,
                 shape: BoxShape.circle,
               ),
               child: Center(

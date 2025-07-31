@@ -84,8 +84,8 @@ class _SettingsPageState extends State<SettingsPage> {
               onChanged: _toggleLocation,
             ),
 
-            SwitchListTile(
-              title: const Text('Dark Mode'),
+            _buildCustomSwitchTile(
+              title: 'Dark Mode',
               value: themeManager.themeMode == ThemeMode.dark,
               onChanged: (value) {
                 themeManager.toggleTheme(value);
